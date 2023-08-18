@@ -1,7 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Text, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, { useLayoutEffect } from "react";
+import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
+import { HeroImage } from "../assets";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -35,9 +43,29 @@ const HomeScreen = () => {
       <View className="w-[400px] h-[400px] bg-[#00bcc9] rounded-full absolute bottom-36 -right-36"></View>
       <View className="w-[400px] h-[400px] bg-[#13c457] rounded-full absolute -bottom-28 -left-36"></View>
       {/*image section */}
-      <View className="flex-1 relative items-center justify-center"></View>
-      <Image
-      source={("../assets/images/hero.png")}>
+      <View className="flex-1 relative items-center justify-center">
+        <Animatable.Image
+          animation={"fadeIn"}
+          easing={"ease-in-out"}
+          source={HeroImage}
+          className="v-full h-full  object-cover mt-6"
+        />
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Discover")}
+          className="absolute bottom-20 w-24 h-24 border-l-2 border-r-2 border-t-4 border-[#00bcc9]
+        rounded-full items-center justify-center"
+        >
+          <Animatable.View
+            easing={"ease-in-out"}
+            animation={"bounceIn"}
+            iterationCount={"infinite"}
+            className="w-20 h-20 items-center justify-center rounded-full bg-[#00bcc9]"
+          >
+            <Text className="text-gray-50 text-[36px] font-semibold">GO</Text>
+          </Animatable.View>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
